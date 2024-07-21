@@ -6,6 +6,10 @@ from collections import namedtuple
 import cv2
 import numpy as np
 import tensorflow as tf
+
+tf.compat.v1.disable_eager_execution()
+
+
 from scipy.ndimage import maximum_filter, gaussian_filter
 
 import common
@@ -102,7 +106,7 @@ class PoseEstimator:
         'idx1', 'idx2',
         'coord1', 'coord2',
         'score1', 'score2'
-    ], verbose=False)
+    ])
 
     def __init__(self):
         pass

@@ -273,8 +273,9 @@ def preprocess_for_eval(image, height, width,
     if height and width:
       # Resize the image to the specified height and width.
       image = tf.expand_dims(image, 0)
-      image = tf.image.resize_bilinear(image, [height, width],
-                                       align_corners=False)
+      # image = tf.image.resize_bilinear(image, [height, width],
+      #                                  align_corners=False)
+      image = tf.compat.v1.image.resize_bilinear(image, [height, width], align_corners=False)
       image = tf.squeeze(image, [0])
     image = tf.subtract(image, 0.5)
     image = tf.multiply(image, 2.0)

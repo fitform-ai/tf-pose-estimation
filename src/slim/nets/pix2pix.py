@@ -33,8 +33,10 @@ import collections
 import functools
 
 import tensorflow as tf
+import tensorflow_addons as tfa
 
-layers = tf.contrib.layers
+
+layers = tfa.layers
 
 
 def pix2pix_arg_scope():
@@ -52,7 +54,7 @@ def pix2pix_arg_scope():
       'epsilon': 0.00001,
   }
 
-  with tf.contrib.framework.arg_scope(
+  with tfa.framework.arg_scope(
       [layers.conv2d, layers.conv2d_transpose],
       normalizer_fn=layers.instance_norm,
       normalizer_params=instance_norm_params,
@@ -168,7 +170,7 @@ def pix2pix_generator(net,
   # Encoder #
   ###########
   with tf.variable_scope('encoder'):
-    with tf.contrib.framework.arg_scope(
+    with tfa.framework.arg_scope(
         [layers.conv2d],
         kernel_size=[4, 4],
         stride=2,
@@ -199,7 +201,7 @@ def pix2pix_generator(net,
   with tf.variable_scope('decoder'):
     # Dropout is used at both train and test time as per 'Image-to-Image',
     # Section 2.1 (last paragraph).
-    with tf.contrib.framework.arg_scope([layers.dropout], is_training=True):
+    with tfa.framework.arg_scope([layers.dropout], is_training=True):
 
       for block_id, block in enumerate(reversed_blocks):
         if block_id > 0:
@@ -253,7 +255,7 @@ def pix2pix_discriminator(net, num_filters, padding=2, is_training=False):
     else:
       return net
 
-  with tf.contrib.framework.arg_scope(
+  with tfa.framework.arg_scope(
       [layers.conv2d],
       kernel_size=[4, 4],
       stride=2,

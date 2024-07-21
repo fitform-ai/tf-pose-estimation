@@ -110,7 +110,9 @@ import functools
 
 import tensorflow as tf
 
-slim = tf.contrib.slim
+import tf_slim as slim
+import tensorflow_addons as tfa
+
 
 # Conv and DepthSepConv namedtuple define layers of the MobileNet architecture
 # Conv defines 3x3 convolution layers
@@ -273,7 +275,7 @@ def mobilenet_v1(inputs,
                  min_depth=8,
                  depth_multiplier=1.0,
                  conv_defs=None,
-                 prediction_fn=tf.contrib.layers.softmax,
+                 prediction_fn=tfa.layers.softmax,
                  spatial_squeeze=True,
                  reuse=None,
                  scope='MobilenetV1',
@@ -413,7 +415,7 @@ def mobilenet_v1_arg_scope(is_training=True,
 
   # Set weight_decay for weights in Conv and DepthSepConv layers.
   weights_init = tf.truncated_normal_initializer(stddev=stddev)
-  regularizer = tf.contrib.layers.l2_regularizer(weight_decay)
+  regularizer = tfa.layers.l2_regularizer(weight_decay)
   if regularize_depthwise:
     depthwise_regularizer = regularizer
   else:

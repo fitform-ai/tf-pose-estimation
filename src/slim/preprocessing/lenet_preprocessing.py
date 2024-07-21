@@ -19,8 +19,10 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
+import tf_slim as slim
 
-slim = tf.contrib.slim
+# import tf_slim as slim
+
 
 
 def preprocess_image(image, output_height, output_width, is_training):
