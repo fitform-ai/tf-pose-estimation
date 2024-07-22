@@ -21,8 +21,8 @@ Implemented features are listed here : [features](./etcs/feature.md)
 
 You need dependencies below.
 
-- python3
-- tensorflow 1.4.1+
+- python3.9
+- tensorflow 2.15.1
 - opencv3, protobuf, python3-tk
 
 ### Install
